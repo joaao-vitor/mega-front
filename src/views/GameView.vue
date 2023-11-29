@@ -139,9 +139,11 @@ export default {
                             <div class="flex flex-col mt-2 h-full w-full">
                                 <header class="flex justify-between w-full">
                                     <div class="flex">
-                                        <span class="text-white text-sm font-semibold mr-2">
-                                            {{ review.nome }}
-                                        </span>
+                                        <router-link :to="`/user/${review.usuarioid}`">
+                                            <span class="text-white text-sm font-semibold mr-2">
+                                                {{ review.nome }}
+                                            </span>
+                                        </router-link>
                                         <StarFull class="w-3.5 text-yellow-400 opacity-50 group-hover:opacity-100"
                                             v-for="i in review.classificacao" />
                                         <StarEmpty class="w-3.5 text-yellow-400 opacity-50 group-hover:opacity-100"
