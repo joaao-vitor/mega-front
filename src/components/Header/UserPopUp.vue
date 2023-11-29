@@ -21,7 +21,8 @@ export default {
     },
     props: ['isOpen'],
     setup(props, { emit }) {
-        const { user, removeUser } = storeToRefs(useUserStore())
+        const { removeUser } = useUserStore()
+        const { user } = storeToRefs(useUserStore())
         const { showSuccess } = useNotification()
         const userPopUp = ref(null)
         const isOpen = props.isOpen
@@ -33,10 +34,12 @@ export default {
                 await axios.delete(
                     `${import.meta.env.VITE_API_URL}/auth/logout`
                 )
-                userStore.removeUser()
+                removeUser()
                 showSuccess('Deslogado com sucesso!')
                 emit('close')
-            } catch (error) { }
+            } catch (error) {
+                console.log(error)
+            }
         }
         const closePopup = (event) => {
             if (isOpen && !userPopUp.value.contains(event.target) && countClose.value === 1) {
