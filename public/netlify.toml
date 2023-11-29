@@ -6,6 +6,6 @@
 
 [[redirects]]
   from = "/api/*"
-  to = "https://mega-back-aaia.onrender.com/:splat"
+  to = "https://mega-back-aaia.onrender.com/api/:splat"
   status = 200
   force = true
