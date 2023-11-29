@@ -46,6 +46,12 @@ export default {
             }
             countClose.value++
         }
+
+        const closePopUp = () => {
+            emit('close')
+            modalStore.hideModal()
+            countClose.value = 0
+        }
         const userImg = ref('')
         onMounted(async () => {
             const { data: userData } = await axios.get(`${import.meta.env.VITE_API_URL}/user/${user.value.usuarioid}`)
@@ -59,7 +65,8 @@ export default {
         return {
             logout,
             userPopUp,
-            user, userImg
+            user, userImg,
+            closePopUp
         }
     },
 }
@@ -73,25 +80,25 @@ export default {
                 'background-image': `url(${userImg})`,
             }"></div>
             <div>
-                <h3 class="text-sm font-semibold opacity-80">João Vitor</h3>
+                <h3 class="text-sm font-semibold opacity-80">{{ user.nome }}</h3>
             </div>
         </header>
         <hr class="border-white border-1 w-full border-opacity-20" />
         <section>
             <nav>
                 <ul class="text-sm">
-                    <router-link :to="`/user/${user.usuarioid}`">
+                    <router-link @click="closePopUp" :to="`/user/${user.usuarioid}`">
                         <li>
                             <UserIcon class="h-5" />Perfil
                         </li>
                     </router-link>
 
-                    <router-link :to="`/config`">
+                    <router-link @click="closePopUp" :to="`/config`">
                         <li>
                             <Cog6ToothIcon class="h-5" /> Configurações da conta
                         </li>
                     </router-link>
-                    <router-link to="/dashboard" class="">
+                    <router-link @click="closePopUp" to="/dashboard" class="">
                         <li v-if="user.isAdmin">
                             <LifebuoyIcon class="h-5" /> Painel
                         </li>

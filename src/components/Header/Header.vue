@@ -29,6 +29,7 @@ export default {
         const userStore = useUserStore()
         const ModalLoginStore = useModalLoginStore()
 
+
         const handleClickUser = () => {
             if (userStore.user) {
                 userPopUpShown.value = !userPopUpShown.value
@@ -54,6 +55,10 @@ export default {
                 modalStore.showModal()
         }
 
+        const hideMenu = () => {
+            menuShown.value = false
+        }
+
 
         onMounted(() => {
             resizeEvent()
@@ -74,6 +79,7 @@ export default {
             modalLogin,
             closeModalLogin,
             showModalLogin,
+            hideMenu
         }
     },
 }
@@ -92,9 +98,9 @@ export default {
                 </div>
                 <nav class="md:flex md:justify-center md:items-center">
                     <ul class="menu">
-                        <li><router-link to="/">Inicio</router-link></li>
-                        <li><router-link to="#">Categorias</router-link></li>
-                        <li><router-link to="#">Explore</router-link></li>
+                        <li><router-link to="/" @click="hideMenu">Inicio</router-link></li>
+                        <li><router-link to="#" @click="hideMenu">Categorias</router-link></li>
+                        <li><router-link to="#" @click="hideMenu">Explore</router-link></li>
                         <li>
                             <router-link to="/calendar">Calendário</router-link>
                         </li>
