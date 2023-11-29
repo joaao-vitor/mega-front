@@ -55,7 +55,7 @@ export default {
             () =>
             (isDescriptionValid.value.isValid =
                 description.value.length > 0 &&
-                description.value.length < 250),
+                description.value.length < 500),
             {}
         )
 

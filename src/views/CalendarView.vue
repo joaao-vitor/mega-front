@@ -6,9 +6,14 @@ export default {
     components: { GameItem },
     setup() {
         const futureGames = ref([])
+        const meses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ']
         const fetchFutureGames = async () => {
             try {
                 const { data: dataFuture } = await axios.get(`${import.meta.env.VITE_API_URL}/jogo/future`)
+                for (const game of dataFuture) {
+                    game.dia = new Date(game.data_lancamento).getDate() + 1
+                    game.mes = meses[new Date(game.data_lancamento).getMonth()]
+                }
                 futureGames.value = dataFuture
             } catch (error) {
                 console.log(error)
