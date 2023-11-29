@@ -17,7 +17,7 @@ export default {
         const { showError, showSuccess } = useNotification()
         onMounted(async () => {
             token.value = router.currentRoute.value.query.token || ''
-            token.value = router.currentRoute.value.query.email || ''
+            email.value = router.currentRoute.value.query.email || ''
         });
         const handleClick = async () => {
 
