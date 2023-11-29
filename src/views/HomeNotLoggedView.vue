@@ -24,7 +24,7 @@ export default {
 <template>
 
     <main class="relative w-full h-full flex justify-center items-center">
-        <Hero :imgUrl="'src/assets/imgs/gta-v.jpg'" />
+        <Hero :imgUrl="'/assets/imgs/gta-v.jpg'" />
         <section
             class="max-w-5xl p-5 absolute h-full flex flex-col justify-center items-center"
         >
