@@ -68,7 +68,7 @@ export default {
                 const { data: dataDelProg } = await axios.delete(`${import.meta.env.VITE_API_URL}/userProgress`)
                 showSuccess(`Progresso deletado com sucesso!`)
             } else {
-                const { data: dataDelProg } = await axios.post(`${import.meta.env.VITE_API_URL}/userProgress`, {progressoid, jogoid: game.value.jogoid})
+                const { data: dataDelProg } = await axios.post(`${import.meta.env.VITE_API_URL}/userProgress`, { progressoid, jogoid: game.value.jogoid })
                 showSuccess('Progresso atualizado com sucesso!')
             }
         }
@@ -105,15 +105,17 @@ export default {
         <div v-if="!showAllReviews"
             class="relative font-inter md:p-20 p-10 py-24 flex flex-col h-full w-full justify-center md:items-center md:grid lg:grid-cols-2 lg:gap-20">
             <div class="md:flex md:flex-col md:justify-center">
-                <select name="" id="" @change="handleChangeCategory" v-if="!!user"
+                <select name="" id="" @change="handleChangeCategory"
+                    v-if="!!user && new Date(game.data_lancamento) <= new Date()"
                     class="mb-4 w-36 px-4 py-2 text-xs border border-gray-300 bg-transparent rounded-full text-gray-300 font-semibold">
+
                     <option value="0" class="text-black-1000">Marcar como</option>
                     <option v-for="cat in catProgresso" :key="cat.progressoid" :value="cat.progressoid"
                         class="text-black-1000">{{ cat.nome }}</option>
                 </select>
                 <h1 class="text-white text-3xl font-bold">{{ game.nome }}</h1>
                 <h4 class="text-white text-sm flex gap-2"><span v-for="emp in game.empresas">{{ emp.nome }}</span> - <span
-                        class="opacity-80"> 2014 </span></h4>
+                        class="opacity-80"> {{ new Date(game.data_lancamento).getFullYear() }} </span></h4>
                 <div class="flex mt-2">
                     <StarFull class="w-6 text-yellow-400" v-for="i in reviewAvg" />
                     <StarEmpty class="w-6 text-yellow-400 text-opacity-50" v-for="i in 5 - reviewAvg" />
@@ -159,7 +161,8 @@ export default {
 
                     </div>
                     <div class="flex gap-3 self-end">
-                        <Button class="text-white bg-yellow-600 flex gap-2 items-center" @click="showModal" v-if="!!user">
+                        <Button class="text-white bg-yellow-600 flex gap-2 items-center" @click="showModal"
+                            v-if="!!user && new Date(game.data_lancamento) <= new Date()">
                             <PlusIcon class="w-4" />
                             Nova Review
                         </Button>
