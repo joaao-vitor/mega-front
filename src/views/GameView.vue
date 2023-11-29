@@ -105,7 +105,7 @@ export default {
         <div v-if="!showAllReviews"
             class="relative font-inter md:p-20 p-10 py-24 flex flex-col h-full w-full justify-center md:items-center md:grid lg:grid-cols-2 lg:gap-20">
             <div class="md:flex md:flex-col md:justify-center">
-                <select name="" id="" @change="handleChangeCategory"
+                <select name="" id="" @change="handleChangeCategory" v-if="!!user"
                     class="mb-4 w-36 px-4 py-2 text-xs border border-gray-300 bg-transparent rounded-full text-gray-300 font-semibold">
                     <option value="0" class="text-black-1000">Marcar como</option>
                     <option v-for="cat in catProgresso" :key="cat.progressoid" :value="cat.progressoid"
@@ -159,7 +159,7 @@ export default {
 
                     </div>
                     <div class="flex gap-3 self-end">
-                        <Button class="text-white bg-yellow-600 flex gap-2 items-center" @click="showModal">
+                        <Button class="text-white bg-yellow-600 flex gap-2 items-center" @click="showModal" v-if="!!user">
                             <PlusIcon class="w-4" />
                             Nova Review
                         </Button>
